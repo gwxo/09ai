@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Prashant AI - Transform AI Text into Natural Human Writing</title>
+    <meta name="title" content="Prashant AI - Transform AI Text into Natural Human Writing">
+    <meta name="description" content="Convert AI-generated text into natural, human-like writing instantly. Bypass AI detection and improve readability with Prashant AI.">
+    <meta name="keywords" content="AI Humanizer, AI to Human Text, Bypass AI Detection, Natural Writing, Content Optimization, Prashant AI">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thehixvy.pages.dev/Humanizer">
+    <meta property="og:title" content="Prashant AI - Transform AI Text into Natural Human Writing">
+    <meta property="og:description" content="Instantly humanize AI content. Professional, undetectable, and highly readable.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&h=630&fit=crop">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Prashant AI - Humanize AI Content">
+    <meta property="twitter:description" content="Convert robotic AI text into high-quality human prose in one click.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --cyan: #00FFFF;
+            --black: #000000;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--white);
+            color: var(--black);
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--cyan);
+            border: 2px solid black;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        /* Neo Brutalism Components */
+        .neo-brutal-card {
+            background: var(--white);
+            border: 4px solid var(--black);
+            box-shadow: 8px 8px 0px 0px var(--black);
+            transition: all 0.2s ease;
+        }
+
+        .neo-brutal-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px 0px var(--black);
+            background-color: var(--cyan);
+        }
+
+        .neo-brutal-btn {
+            background: var(--cyan);
+            border: 3px solid var(--black);
+            box-shadow: 4px 4px 0px 0px var(--black);
+            transition: all 0.1s active;
+        }
+
+        .neo-brutal-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px var(--black);
+        }
+
+        .neo-brutal-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px var(--black);
+        }
+
+        /* Scroll Progress */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 8px;
+            background: var(--cyan);
+            z-index: 10001;
+            border-bottom: 2px solid black;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Accordion Custom Styling */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        /* Marquee effect for trust section */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: white; }
+        ::-webkit-scrollbar-thumb { 
+            background: black; 
+            border: 3px solid white;
+            border-radius: 10px;
+        }
+    </style>
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Prashant AI",
+      "operatingSystem": "Web",
+      "applicationCategory": "AI Content Tool",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "10000"
+      }
+    }
+    </script>
+</head>
+<body class="antialiased">
+
+    <!-- UI Elements -->
+    <div id="custom-cursor" class="hidden md:block"></div>
+    <div id="scroll-progress"></div>
+    <button id="back-to-top" class="fixed bottom-8 right-8 z-50 neo-brutal-btn p-3 bg-white hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 bg-white border-b-4 border-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-black flex items-center justify-center neo-brutal-card translate-x-0 translate-y-0">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="cyan" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12L2.1 12.1"/><path d="M12 12v10a10 10 0 0 0 10-10H12z"/></svg>
+                    </div>
+                    <span class="text-2xl font-black tracking-tighter uppercase">Prashant AI</span>
+                </div>
+                <div class="hidden md:flex space-x-8 font-bold">
+                    <a href="#features" class="hover:text-cyan-500 transition-colors">Features</a>
+                    <a href="#demo" class="hover:text-cyan-500 transition-colors">Demo</a>
+                    <a href="#testimonials" class="hover:text-cyan-500 transition-colors">Reviews</a>
+                </div>
+                <div>
+                    <a href="https://thehixvy.pages.dev/Humanizer" class="neo-brutal-btn px-6 py-2 bg-black text-white font-bold inline-block">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 bg-[#f0f0f0] border-b-4 border-black relative overflow-hidden">
+        <div class="absolute top-20 right-10 opacity-20 animate-float hidden lg:block">
+            <svg width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="inline-block bg-white border-2 border-black px-4 py-1 mb-6 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] uppercase tracking-widest text-sm">
+                Next-Gen AI Humanizer
+            </div>
+            <h1 class="text-5xl md:text-8xl font-black mb-8 leading-tight tracking-tighter">
+                Humanize AI Content <br><span class="bg-cyan-400 px-4">Instantly</span>
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-10 font-medium leading-relaxed">
+                Convert AI-generated text into natural, human-like writing that reads authentically and passes AI detection tools with 100% accuracy.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <a href="https://thehixvy.pages.dev/Humanizer" class="neo-brutal-btn bg-black text-white px-10 py-5 text-xl font-black hover:bg-cyan-400 hover:text-black transition-colors">
+                    Try Humanizer Now
+                </a>
+                <button class="neo-brutal-btn bg-white px-10 py-5 text-xl font-black flex items-center justify-center gap-2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    Watch Demo
+                </button>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="neo-brutal-card p-6 bg-white">
+                    <div class="text-4xl font-black counter" data-target="50000">0</div>
+                    <div class="font-bold uppercase text-sm">Articles Humanized</div>
+                </div>
+                <div class="neo-brutal-card p-6 bg-white">
+                    <div class="text-4xl font-black counter" data-target="10000">0</div>
+                    <div class="font-bold uppercase text-sm">Active Users</div>
+                </div>
+                <div class="neo-brutal-card p-6 bg-white">
+                    <div class="text-4xl font-black counter" data-target="99">0</div>
+                    <div class="font-bold uppercase text-sm">Satisfaction %</div>
+                </div>
+                <div class="neo-brutal-card p-6 bg-white">
+                    <div class="text-4xl font-black">Fast</div>
+                    <div class="font-bold uppercase text-sm">Processing</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Marquee -->
+    <div class="bg-black py-6 border-b-4 border-black overflow-hidden">
+        <div class="marquee-container">
+            <div class="marquee-content flex gap-20 items-center">
+                <span class="text-white text-2xl font-black uppercase flex items-center gap-4">
+                    <svg width="24" height="24" fill="cyan" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Trusted by 10,000+ Writers
+                </span>
+                <span class="text-white text-2xl font-black uppercase flex items-center gap-4">
+                    <svg width="24" height="24" fill="cyan" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Used for 50k+ Articles
+                </span>
+                <span class="text-white text-2xl font-black uppercase flex items-center gap-4">
+                    <svg width="24" height="24" fill="cyan" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    99.9% Detect-Proof
+                </span>
+                <span class="text-white text-2xl font-black uppercase flex items-center gap-4">
+                    <svg width="24" height="24" fill="cyan" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Trusted by 10,000+ Writers
+                </span>
+                <span class="text-white text-2xl font-black uppercase flex items-center gap-4">
+                    <svg width="24" height="24" fill="cyan" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Used for 50k+ Articles
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-black mb-16 text-center reveal uppercase italic underline decoration-cyan-400">
+                Powerful Features
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- 10 Features Cards -->
+                <div class="neo-brutal-card p-6 reveal">
+                    <div class="bg-black w-12 h-12 flex items-center justify-center mb-4">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">AI Humanization</h3>
+                    <p class="text-sm font-medium">Bypass detection with proprietary algorithms.</p>
+                </div>
+                <div class="neo-brutal-card p-6 reveal">
+                    <div class="bg-black w-12 h-12 flex items-center justify-center mb-4">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5M9 15l3-3 5 5M15 8l2-2 4 4"/></svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">Natural Style</h3>
+                    <p class="text-sm font-medium">Writes exactly like a professional human editor.</p>
+                </div>
+                <div class="neo-brutal-card p-6 reveal">
+                    <div class="bg-black w-12 h-12 flex items-center justify-center mb-4">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">Plagiarism Friendly</h3>
+                    <p class="text-sm font-medium">Unique outputs that pass every copyscape check.</p>
+                </div>
+                <div class="neo-brutal-card p-6 reveal">
+                    <div class="bg-black w-12 h-12 flex items-center justify-center mb-4">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">Fast Processing</h3>
+                    <p class="text-sm font-medium">Get your results in under 5 seconds, every time.</p>
+                </div>
+                <div class="neo-brutal-card p-6 reveal">
+                    <div class="bg-black w-12 h-12 flex items-center justify-center mb-4">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">Multiple Tones</h3>
+                    <p class="text-sm font-medium">From casual blogging to academic formal.</p>
+                </div>
+                <div class="neo-brutal-card p-6 reveal">
+                    <div class="bg-black w-12 h-12 flex items-center justify-center mb-4">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">SEO Optimized</h3>
+                    <p class="text-sm font-medium">Keep your keywords while improving flow.</p>
+                </div>
+                <div class="neo-brutal-card p-6 reveal">
+                    <div class="bg-black w-12 h-12 flex items-center justify-center mb-4">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">Student Ready</h3>
+                    <p class="text-sm font-medium">Perfect for essays and research papers.</p>
+                </div>
+                <div class="neo-brutal-card p-6 reveal">
+                    <div class="bg-black w-12 h-12 flex items-center justify-center mb-4">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">Blogger Choice</h3>
+                    <p class="text-sm font-medium">Engage readers with high-quality prose.</p>
+                </div>
+                <div class="neo-brutal-card p-6 reveal">
+                    <div class="bg-black w-12 h-12 flex items-center justify-center mb-4">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">Copywriter Tool</h3>
+                    <p class="text-sm font-medium">Scale your copywriting without sounding robotic.</p>
+                </div>
+                <div class="neo-brutal-card p-6 reveal">
+                    <div class="bg-black w-12 h-12 flex items-center justify-center mb-4">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">One Click</h3>
+                    <p class="text-sm font-medium">The easiest interface in the industry.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-24 px-4 bg-cyan-400 border-y-4 border-black">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-black mb-16 text-center uppercase tracking-tighter">How It Works</h2>
+            <div class="relative">
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-2 bg-black hidden md:block"></div>
+                <div class="space-y-12">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col md:flex-row items-center gap-8 reveal">
+                        <div class="flex-1 md:text-right">
+                            <h3 class="text-3xl font-black uppercase">Step 1: Paste AI Content</h3>
+                            <p class="font-bold text-lg">Copy text from ChatGPT, Gemini, or Claude and paste it into our editor.</p>
+                        </div>
+                        <div class="w-16 h-16 bg-white border-4 border-black rounded-full flex items-center justify-center text-3xl font-black z-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">1</div>
+                        <div class="flex-1 hidden md:block"></div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="flex flex-col md:flex-row-reverse items-center gap-8 reveal">
+                        <div class="flex-1 md:text-left">
+                            <h3 class="text-3xl font-black uppercase">Step 2: Click Humanize</h3>
+                            <p class="font-bold text-lg">Choose your preferred tone and click the Humanize button to start the magic.</p>
+                        </div>
+                        <div class="w-16 h-16 bg-white border-4 border-black rounded-full flex items-center justify-center text-3xl font-black z-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">2</div>
+                        <div class="flex-1 hidden md:block"></div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="flex flex-col md:flex-row items-center gap-8 reveal">
+                        <div class="flex-1 md:text-right">
+                            <h3 class="text-3xl font-black uppercase">Step 3: Receive Output</h3>
+                            <p class="font-bold text-lg">Instantaneously get high-quality, human-like text ready for publishing.</p>
+                        </div>
+                        <div class="w-16 h-16 bg-white border-4 border-black rounded-full flex items-center justify-center text-3xl font-black z-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">3</div>
+                        <div class="flex-1 hidden md:block"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Preview Section -->
+    <section id="demo" class="py-24 px-4 bg-white border-b-4 border-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-black mb-16 text-center reveal uppercase">Before & After</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="neo-brutal-card bg-red-50 p-8 reveal">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <span class="font-black uppercase tracking-widest text-red-500">AI Generated</span>
+                    </div>
+                    <p class="text-gray-600 font-medium italic">
+                        "Artificial intelligence has reached a point where it can generate text that is highly similar to human writing. This technology utilizes large language models to predict the next word in a sequence, resulting in content that is technically correct but often lacks emotional depth and unique stylistic variation."
+                    </p>
+                </div>
+                <div class="neo-brutal-card bg-cyan-50 p-8 reveal">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="font-black uppercase tracking-widest text-green-600">Humanized by Prashant AI</span>
+                    </div>
+                    <p class="text-black font-bold">
+                        "Modern AI is getting scary good at writing, but let's be honest—it still sounds a bit 'robotic.' While LLMs can string together perfect sentences, they often miss that human spark. That's why I've been focusing on adding real personality and flow to my digital content."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-24 px-4 bg-[#f9f9f9]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="neo-brutal-card p-10 reveal bg-white">
+                    <h3 class="text-3xl font-black mb-4 uppercase">Readability</h3>
+                    <p class="font-medium text-lg">Break free from robotic sentence structures and improve the user reading experience.</p>
+                </div>
+                <div class="neo-brutal-card p-10 reveal bg-cyan-400">
+                    <h3 class="text-3xl font-black mb-4 uppercase">Originality</h3>
+                    <p class="font-medium text-lg">Create content that doesn't just pass detection, but actually provides new value.</p>
+                </div>
+                <div class="neo-brutal-card p-10 reveal bg-white">
+                    <h3 class="text-3xl font-black mb-4 uppercase">Engagement</h3>
+                    <p class="font-medium text-lg">Humanized text holds attention 40% longer than raw AI output.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-20 bg-black text-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+                <div class="reveal">
+                    <div class="text-5xl md:text-7xl font-black text-cyan-400 mb-2 counter" data-target="50000">0</div>
+                    <p class="font-bold uppercase tracking-widest text-sm">Docs Humanized</p>
+                </div>
+                <div class="reveal">
+                    <div class="text-5xl md:text-7xl font-black text-cyan-400 mb-2 counter" data-target="10000">0</div>
+                    <p class="font-bold uppercase tracking-widest text-sm">Users</p>
+                </div>
+                <div class="reveal">
+                    <div class="text-5xl md:text-7xl font-black text-cyan-400 mb-2 counter" data-target="1000000">0</div>
+                    <p class="font-bold uppercase tracking-widest text-sm">Words Processed</p>
+                </div>
+                <div class="reveal">
+                    <div class="text-5xl md:text-7xl font-black text-cyan-400 mb-2">99.9%</div>
+                    <p class="font-bold uppercase tracking-widest text-sm">Uptime</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 px-4 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-black mb-16 text-center uppercase reveal italic">Wall of Love</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="testimonial-container">
+                <!-- Testimonial 1 -->
+                <div class="neo-brutal-card p-8 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 border-2 border-black rounded-full overflow-hidden bg-cyan-200">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Avatar">
+                        </div>
+                        <div>
+                            <p class="font-black text-lg">Sarah Jenkins</p>
+                            <p class="text-sm font-bold uppercase text-gray-500">Senior Blogger</p>
+                        </div>
+                    </div>
+                    <p class="font-medium italic">"Prashant AI has cut my editing time by 70%. It turns my AI drafts into something I'm actually proud to publish."</p>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="neo-brutal-card p-8 reveal bg-cyan-400">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 border-2 border-black rounded-full overflow-hidden bg-white">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Liam" alt="Avatar">
+                        </div>
+                        <div>
+                            <p class="font-black text-lg">Markus Thorne</p>
+                            <p class="text-sm font-bold uppercase text-black">SEO Consultant</p>
+                        </div>
+                    </div>
+                    <p class="font-medium italic">"I was skeptical about AI humanizers until I tried this. It passes every detection tool I've thrown at it."</p>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="neo-brutal-card p-8 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 border-2 border-black rounded-full overflow-hidden bg-yellow-200">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Anya" alt="Avatar">
+                        </div>
+                        <div>
+                            <p class="font-black text-lg">Anya Patel</p>
+                            <p class="text-sm font-bold uppercase text-gray-500">Student</p>
+                        </div>
+                    </div>
+                    <p class="font-medium italic">"Essential tool for cleaning up my research notes. It makes the text flow naturally and sound professional."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 px-4 bg-white border-t-4 border-black">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-black mb-16 text-center reveal uppercase">Questions?</h2>
+            <div class="space-y-4">
+                <div class="neo-brutal-card bg-white cursor-pointer group" onclick="toggleAccordion(0)">
+                    <div class="p-6 flex justify-between items-center">
+                        <h3 class="text-xl font-black uppercase">What is Prashant AI?</h3>
+                        <svg class="transition-transform duration-300 transform group-active:rotate-180" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content px-6 pb-6 font-medium text-gray-700">
+                        Prashant AI is an advanced text processing engine designed to transform robotic AI-generated content into natural-sounding, human-like writing.
+                    </div>
+                </div>
+                <div class="neo-brutal-card bg-white cursor-pointer group" onclick="toggleAccordion(1)">
+                    <div class="p-6 flex justify-between items-center">
+                        <h3 class="text-xl font-black uppercase">How does text humanization work?</h3>
+                        <svg class="transition-transform duration-300 transform group-active:rotate-180" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content px-6 pb-6 font-medium text-gray-700">
+                        We use custom-trained models that rewrite text with varied sentence structures, idioms, and nuances that AI tools typically lack.
+                    </div>
+                </div>
+                <div class="neo-brutal-card bg-white cursor-pointer group" onclick="toggleAccordion(2)">
+                    <div class="p-6 flex justify-between items-center">
+                        <h3 class="text-xl font-black uppercase">Is it free?</h3>
+                        <svg class="transition-transform duration-300 transform group-active:rotate-180" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content px-6 pb-6 font-medium text-gray-700">
+                        We offer a generous free tier for users to test the power of Prashant AI, with premium plans for high-volume needs.
+                    </div>
+                </div>
+                <div class="neo-brutal-card bg-white cursor-pointer group" onclick="toggleAccordion(3)">
+                    <div class="p-6 flex justify-between items-center">
+                        <h3 class="text-xl font-black uppercase">Can students use it?</h3>
+                        <svg class="transition-transform duration-300 transform group-active:rotate-180" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content px-6 pb-6 font-medium text-gray-700">
+                        Absolutely! Students use it to improve their writing style and ensure their papers read clearly and professionally.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-24 px-4">
+        <div class="max-w-5xl mx-auto neo-brutal-card bg-black text-white p-12 md:p-20 text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-cyan-400 opacity-10 animate-pulse pointer-events-none"></div>
+            <h2 class="text-5xl md:text-7xl font-black mb-8 relative z-10">Ready to Humanize <br>Your Content?</h2>
+            <p class="text-xl md:text-2xl mb-12 font-medium opacity-90 relative z-10">Join 10,000+ users who are scaling their content without losing the human touch.</p>
+            <a href="https://thehixvy.pages.dev/Humanizer" class="neo-brutal-btn bg-cyan-400 text-black px-12 py-6 text-2xl font-black inline-block relative z-10 hover:bg-white transition-colors">
+                Launch Humanizer
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t-4 border-black py-20 px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="w-10 h-10 bg-black flex items-center justify-center neo-brutal-card translate-x-0 translate-y-0">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="cyan" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12L2.1 12.1"/><path d="M12 12v10a10 10 0 0 0 10-10H12z"/></svg>
+                    </div>
+                    <span class="text-3xl font-black uppercase italic tracking-tighter">Prashant AI</span>
+                </div>
+                <p class="text-lg font-bold max-w-sm mb-8">The gold standard for AI text humanization. Built for the modern writer.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="neo-brutal-btn p-3 bg-white hover:bg-cyan-400"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+                    <a href="#" class="neo-brutal-btn p-3 bg-white hover:bg-cyan-400"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-black text-xl mb-6 uppercase">Product</h4>
+                <ul class="space-y-4 font-bold">
+                    <li><a href="#features" class="hover:underline">Features</a></li>
+                    <li><a href="https://thehixvy.pages.dev/Humanizer" class="hover:underline">Try Now</a></li>
+                    <li><a href="#" class="hover:underline">Pricing</a></li>
+                    <li><a href="#" class="hover:underline">API Docs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-black text-xl mb-6 uppercase">Company</h4>
+                <ul class="space-y-4 font-bold">
+                    <li><a href="#" class="hover:underline">About Us</a></li>
+                    <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:underline">Terms of Service</a></li>
+                    <li><a href="mailto:hello@prashantai.com" class="hover:underline">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-20 pt-8 border-t-2 border-black flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="font-black text-sm uppercase">© 2024 Prashant AI. All rights reserved.</p>
+            <div class="flex gap-4">
+                <span class="w-4 h-4 rounded-full bg-green-500"></span>
+                <span class="font-bold text-xs uppercase tracking-widest">System Status: Operational</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, button, .neo-brutal-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        });
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement, 
+                  b = document.body,
+                  st = 'scrollTop',
+                  sh = 'scrollHeight';
+            const percent = (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight) * 100;
+            document.getElementById('scroll-progress').style.width = percent + '%';
+
+            // Show Back to Top
+            const btt = document.getElementById('back-to-top');
+            if (window.scrollY > 500) btt.classList.remove('hidden');
+            else btt.classList.add('hidden');
+        });
+
+        document.getElementById('back-to-top').onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+
+        // Intersection Observer for Reveal Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Animated Counters
+        const counters = document.querySelectorAll('.counter');
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = +entry.target.getAttribute('data-target');
+                    const count = +entry.target.innerText;
+                    const speed = 200;
+                    const inc = target / speed;
+                    
+                    const updateCount = () => {
+                        const current = +entry.target.innerText;
+                        if (current < target) {
+                            entry.target.innerText = Math.ceil(current + inc);
+                            setTimeout(updateCount, 1);
+                        } else {
+                            entry.target.innerText = target.toLocaleString() + (target < 100 ? '%' : '+');
+                        }
+                    };
+                    updateCount();
+                    countObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        counters.forEach(counter => countObserver.observe(counter));
+
+        // FAQ Accordion
+        function toggleAccordion(index) {
+            const contents = document.querySelectorAll('.accordion-content');
+            const svg = document.querySelectorAll('.accordion-content').parentElement;
+            
+            contents.forEach((content, i) => {
+                if (i === index) {
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                } else {
+                    content.style.maxHeight = null;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
